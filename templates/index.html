@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang='en'>
+<head>
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+	<title>Vaccine Slots by Kuntal</title>
+	<style>
+		.op{
+			color: black;
+		}
+		#dis
+		{
+			color: black;
+		}
+	</style>
+</head>
+<body class="text-gray-400 body-font bg-gray-900">
+	  <div class="container px-5 py-24 mx-auto">
+	    <div class="flex flex-col text-center w-full mb-10">
+	      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">COVID-19 VACCINE TRACKER</h1>
+	      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">This is a vaccine tracker website for West Bengal. Only Available slots are displayed.</p>
+	    </div>
+	    <div class="text-center">
+	    	<form action="/check" method="post" enctype="multipart/form-data">
+	    		<label for="dis">Select Your District</label>
+		    <div class="p-2 w-full">
+	            <select class="form-control" name="dis_id" id="dis">
+		          <option class="op" value="710">Alipurduar District</option>
+		          <option class="op" value="711">Bankura</option>
+		          <option class="op" value="712">Basirhat HD (North 24 Parganas)</option>
+		          <option class="op" value="713">Birbhum</option>
+		          <option class="op" value="714">Bishnupur HD (Bankura)</option>
+		          <option class="op" value="715">Cooch Behar</option>
+		          <option class="op" value="716">Dakshin Dinajpur</option>
+		          <option class="op" value="717">Darjeeling</option>
+		          <option class="op" value="718">Diamond Harbor HD (S 24 Parganas)</option>
+		          <option class="op" value="719">East Bardhaman</option>
+		          <option class="op" value="720">Hoogly</option>
+		          <option class="op" value="721">Howrah</option>
+		          <option class="op" value="722">Jalpaiguri</option>
+		          <option class="op" value="723">Jhargram</option>
+		          <option class="op" value="724">Kalimpong</option>
+		          <option class="op" value="725">Kolkata</option>
+		          <option class="op" value="726">Malda</option>
+		          <option class="op" value="727">Murshidabad</option>
+		          <option class="op" value="728">Nadia</option>
+		          <option class="op" value="729">Nandigram HD (East Medinipore)</option>
+		          <option class="op" value="730">North 24 Parganas</option>
+		          <option class="op" value="731">Paschim Medinipore</option>
+		          <option class="op" value="732">Purba Medinipore</option>
+		          <option class="op" value="733">Purulia</option>
+		          <option class="op" value="734">Rampurhat HD (Birbhum)</option>
+		          <option class="op" value="735">South 24 Parganas</option>
+		          <option class="op" value="736">Uttar Dinajpur</option>
+		          <option class="op" value="737">West Bardhaman</option>
+		        </select>
+	          </div>
+	    	  <div class="p-2 w-full">
+	          		<button type="submit" class="flex mx-auto text-white bg-pink-500 border-0 py-2 px-8 focus:outline-none hover:bg-pink-600 rounded text-lg">Submit</button>
+	          </div>
+	    </form>
+		</div>
+		{% if list |length >0 %}
+		<div class="container official text-center text-white mt-5 mb-5">
+	
+			<table class="rounded-t-lg m-5 w-5/6 mx-auto bg-gray-800 text-gray-200">
+		    <thead>
+		      <tr class="text-left border-b border-gray-300">
+		        <th class="px-4 py-3">Center Name</th>
+		        <th class="px-4 py-3">Address</th>
+		        <th class="px-4 py-3">Vaccine Name</th>
+		        <th class="px-4 py-3">Minimum Age</th>
+		        <th class="px-4 py-3">Dose 1 Availability</th>
+		        <th class="px-4 py-3">Dose 2 Availability</th>
+		        <th class="px-4 py-3">Fees</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    {% for obj in list %}
+		    	<tr class="bg-gray-700 border-b border-gray-600">
+		    		<td class="px-4 py-3">{{ obj.name }}</td>
+		    		<td class="px-4 py-3">{{ obj.address }}, {{ obj.pincode }}</td>
+		    		<td class="px-4 py-3">{{ obj.vaccine_name }}</td>
+		    		<td class="px-4 py-3">{{ obj.age_group }}</td>
+		    		<td class="px-4 py-3">{{ obj.dose1 }}</td>
+		    		<td class="px-4 py-3">{{ obj.dose2 }}</td>
+		    		{% if obj.fee=='0' %}
+		    		<td class="px-4 py-3">Free</td>
+		    		{% else %}
+		    		<td class="px-4 py-3">{{ obj.fee }}</td>
+		    		{% endif %}
+		    	</tr>
+		    {% endfor %}
+			</tbody>
+		</table>
+		</div>
+
+		{% endif %}
+		<div class="container official text-center text-white mt-5">
+	  		<p>For Official COWIN portal <a class="text-indigo-400 inline-flex items-center" href="https://cowin.gov.in">Click Here</a></p>
+	  </div>
+	  </div>
+	  <footer class="text-center">Copyright Kuntal Paul, 2021</footer>
+</body>
+</html>
